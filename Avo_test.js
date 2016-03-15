@@ -10,51 +10,43 @@ describe("converting", function(){
 });
 
 describe("indexMap", function(){
-  it("should return the price and quantity in each deal", function(){
+  it("should return the price and quantity of Avos in each deal", function(){
         var result = Avo.indexMap(['1', '3', '2', '7', '3', '10', '5', '14.50']);
         assert.deepEqual(result,
-      [{
-        "Deal": 'One',
-        "quantity": 1,
-        "price ": 3
-      },
-      {
-        "Deal": 'Two',
-        "quantity": 2,
-        "price ": 7
-      },
-      {
-        "Deal": 'Three',
-        "quantity": 3,
-        "price": 10
-      },
-      {
-        "Deal": 'Four',
-        "quantity": 5,
-        "price": 14.50
-
-      }]);
+    [ { quantity: 1, price: 3 },
+      { quantity: 2, price: 7 },
+      { quantity: 3, price: 10 },
+      { quantity: 5, price: 14.5 } ]);
   });
 });
 
 
 describe("perAvoPrice", function(){
   it("should return the price of one avo in each deal", function(){
-        var result = Avo.perAvoPrice(amountIndex);
+        var result = Avo.perAvoPrice(
+          [ { quantity: 1, price: 3 },
+            { quantity: 2, price: 7 },
+            { quantity: 3, price: 10 },
+            { quantity: 5, price: 14.5 } ]
+          );//amountIndex OR result from previous function
         assert.deepEqual(result, ['3.00', '3.50', '3.33', '2.90']);
   });
 });
 
 describe("Cheapest Deal", function(){
   it("should return the cheapest deal of all Deals", function(){
-      var result = Avo.cheapestDeal(array);
+      var result = Avo.cheapestDeal([ { quantity: 1, price: 3 },
+        { quantity: 2, price: 7 },
+        { quantity: 3, price: 10 },
+        { quantity: 5, price: 14.5 } ]
+      );
       assert.equal(result, "2.90");
   });
 });
 
 describe("Expensive Deal", function(){
       it("should return the most expensive deal of all deals", function(){
-          var result = Avo.expensiveDeal(array); //
+          var result = Avo.expensiveDeal(['3.00', '3.50', '3.33', '2.90']); //
           assert.equal(result, "3.50");
         });
   });

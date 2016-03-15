@@ -8,59 +8,52 @@ console.log(amountIndex);
   return amountIndex;
 };
 
-
-exports.indexMap=function(){
- var map ={}
+exports.indexMap=function(amountIndex){
+  var data = [];
   var quantity = [];
   var price = [];
 
   for (var i = 0; i < amountIndex.length; i++) {
-
     if(i % 2 === 0) { // index is even
         quantity.push(amountIndex[i]);
     }
-
+    else if(i % 2 != 0) { //index is odd
+      {
+        price.push(amountIndex[i]);
+      }
+    }
 }
+console.log("----------------------")
+console.log(quantity)
+console.log(price)
+console.log("----------------------")
 
-for (var i = 1; i < amountIndex.length; i++) {
-  if(i % 2 != 0) { // index is even
-  { // index is even
-      price.push(amountIndex[i]);
-  }
+
+for ( i = 0; i < quantity.length; i++)
+{
+    data.push({
+      quantity: Number(quantity[i]),
+      price: Number(price[i]),
+    })
 }
-};
-console.log(quantity);
-console.log(price);
-return quantityValue;
-return price;
+console.log(data);
+return data;
 };
 
+  exports.perAvoPrice = function(data){ // amountIndex
+    var singlePriceAvo =[];
 
+    for (var x = 0; x < data.length; x++){
+      var singleP = data[x].price / data[x].quantity;
+      var dec = singleP.toFixed(2);
+      var number = Number(dec);
+      singlePriceAvo.push(number);
+    }
 
-//
-//   for(var i = 0; i < amountIndex.length; i++){
-//
-//     if(i % 2 === 0 ){
-//      var quantityValue = parseFloat(amountIndex[i]);
-//     }
-//
-//    for(i = 0; i < amountIndex.length; i+=2)
-//     {
-//       var priceValue = parseFloat(amountIndex[i + 1]);
-//     }
-//
-//   data.push({
-//     quantity : Number(quantityValue),
-//     price: Number(priceValue),
-//   });
-// };
-//
-//
-//   console.log(data);
-//   return data;
-
-  exports.perAvoPrice = function(amountIndex){
-
+    singlePriceAvo.join(",").split(",");
+    console.log(singlePriceAvo);
+    return singlePriceAvo;
+/*
   var quantityArray = [amountIndex[0],amountIndex[2],amountIndex[4],amountIndex[6]];
   var amountArray = [amountIndex[1],amountIndex[3],amountIndex[5],amountIndex[7]];
 
@@ -79,20 +72,30 @@ return price;
   array.push(dl3);
   array.push(dl4);
   console.log(array);
-  return array;
+  return array;*/
 
 };
 
-exports.cheapestDeal = function(array) {
+exports.cheapestDeal = function(singlePriceAvo) {
+  var min = Math.min.apply(Math, singlePriceAvo).toFixed(2);
+    for (y = 0; y < singlePriceAvo.length; y++) {
+      if (singlePriceAvo[y] == min) {
+        console.log(quantity[y] + " for R" + price[y]);
+        return quantity[y] + " for R" + price[y];
+      }
+    }
+  };
 
-    var min = Math.min.apply( Math, array );
-    console.log("Deal 4 :" + min.toFixed(2));
-    return min;
- };
+    // var min = Math.min.apply( Math, singlePriceAvo );
+    // min.toFixed(2);
+    // var min1 = Number(min);
+    // console.log( min1)S;
+    // return min1;
 
- exports.expensiveDeal = function(array){
-   var max = Math.max.apply( Math, array );
-   console.log("Deal 2 :" + max.toFixed(2));
+
+ exports.expensiveDeal = function(singlePriceAvo){
+   var max = Math.max.apply(Math, singlePriceAvo );
+   console.log(max.toFixed(2));
    return max;
  };
 
@@ -103,27 +106,3 @@ exports.cheapestDeal = function(array) {
    console.log("Average :" + avg.toFixed(2));
    return avg;
  };
-//
-
-
-//  for(var i = 0; i < amountIndex.length; i++){
-//
-//    if(i %2 == 0 ){
-//     var quantityValue = parseFloat(amountIndex[i]);
-//    }
-//  };
-//
-//   for(var i = 0; i <amountIndex.length; i++){
-//       if(i % 2 != 0)
-//       {
-//       var priceValue = parseFloat(amountIndex[i + 1]);
-//       }
-//
-//     };
-//   data.push({
-// quantity:  quantityValue,
-//   price: priceValue,
-// }  );
-// };
-
-//
