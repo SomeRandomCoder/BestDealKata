@@ -40,7 +40,7 @@
    jsonFruits.apples.sort(function(a, b){
    return a.price - b.price;
  });
- console.log(jsonFruits.apples)
+ console.log(jsonFruits.apples);
  };
 
  exports.descendingApples = function(apples){
@@ -48,5 +48,37 @@
      return b.price - a.price;
    })
    console.log(jsonFruits.apples);
+
+ };
+
+ exports.cheapestFruit = function(jsonFruits){
+   var fruits = [];
+var total = 0;
+var total1 =0;
+var total2 =0;
+
+for (i=0; i<jsonFruits.length; i++)
+{
+ total += jsonFruits.apples[i].price;
+ total1 += jsonFruits.bananas[i].price;
+ total2 += jsonFruits.oranges[i].price;
+}
+
+      fruits.push({
+        Apples: total},
+        {Bananas: total1},
+        {Oranges: total2
+      });
+
+
+      for (var y = 0; y < fruits.length; y++){
+        fruits.sort();
+      }
+      console.log(fruits[0]);
+      return fruits[0];
+
+
+   console.log(fruits);
+
 
  };
