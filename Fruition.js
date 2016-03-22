@@ -135,34 +135,64 @@ exports.cheapestSeller = function(jsonFruits) {
  return descending
  };
 
-//  exports.cheapestFruit = function(jsonFruits){
-//    var fruits = [];
-// var total = 0;
-// var total1 =0;
-// var total2 =0;
-//
-// for (i=0; i<jsonFruits.length; i++)
-// {
-//  total += jsonFruits.apples[i].price;
-//  total1 += jsonFruits.bananas[i].price;
-//  total2 += jsonFruits.oranges[i].price;
-// }
-//
-//       fruits.push({
-//         Apples: total},
-//         {Bananas: total1},
-//         {Oranges: total2
-//       });
-//
-//
-//       for (var y = 0; y < fruits.length; y++){
-//         fruits.sort();
-//       }
-//       console.log(fruits[0]);
-//       return fruits[0];
-//
-//
-//    console.log(fruits);
-//
-//
-//  };
+ exports.cheapestFruit = function(jsonFruits){
+ var fruits = [];
+  var cheapestPrice = 0;
+  var cheapest = "";
+  for (var shops in jsonFruits) {
+    for (var fruit in jsonFruits[shops]) {
+        fruits.push(fruit);
+      }
+  }
+
+  for (x = 0; x < fruits.length; x++) {
+    var total = 0;
+    var count = 0;
+    for (var Shops in jsonFruits) {
+      if (jsonFruits[Shops].hasOwnProperty(fruits[x])) {
+        total += jsonFruits[Shops][fruits[x]];
+        count++;
+      }
+    }
+    var averagePrice = total / count;
+    if ((averagePrice < cheapestPrice) || cheapestPrice === 0) {
+      cheapestPrice = averagePrice;
+      cheapest = fruits[x];
+    }
+  }
+  console.log(cheapest);
+  return cheapest;
+};
+
+
+exports.cheapestFruitSeller = function(jsonFruits){
+  var minimumPrice = 0;
+   var cheapest = "";
+  for(var shop in jsonFruits){
+    for(var fruit in jsonFruits[shop]){
+      if(minimumPrice===jsonFruits[shop][fruit]){
+        cheapest = cheapest + " and " + shop;
+      }
+     if((minimumPrice > jsonFruits[shop][fruit]) || (minimumPrice === 0)){
+       minimumPrice= jsonFruits[shop][fruit];
+       cheapest =shop;
+     }
+    }
+  }
+  console.log(cheapest);
+  return cheapest;
+  };
+
+exports.orangeSellers=function(jsonFruits){
+  var orangeSellers = [];
+
+  for (var shops in jsonFruits){
+    if(jsonFruits[shops].hasOwnProperty("oranges")){
+      orangeSellers.push(
+        shops
+      );
+    }
+  }
+  console.log(orangeSellers);
+  return orangeSellers;
+}
